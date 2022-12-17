@@ -32,8 +32,7 @@
             <th>Location Name</th>
             <th>Governorate</th>
             <th>District</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
+            <th>Latitude & Longitude</th>
         </tr>
         <tr id="tr">
             <td>NULL</td>
@@ -53,7 +52,7 @@
         <tr>
             <th>Timezone</th>
             <th>Temperature</th>
-            <th>Windspeed_10m</th>
+            <th>Windspeed</th>
         </tr>
         <tr id="tr2">
             <td>NULL</td>
@@ -136,14 +135,10 @@
                     document.getElementById('tr').appendChild(td4);
 
                     var td5 = document.createElement('td');
-                    td5.innerHTML = data[0].Latitude;
+                    td5.innerHTML = data[0].Latitude + " & " + data[0].Longitude;
                     document.getElementById('tr').appendChild(td5);
 
-                    var td6 = document.createElement('td');
-                    td6.innerHTML = data[0].Longitude;
-                    document.getElementById('tr').appendChild(td6);
-
-                    var lanlon = 'latitude=' + data[0].Latitude + '&longitude=' + data[0].Longitude;
+                    var lanlon = 'latitude=' + parseFloat(data[0].Latitude).toFixed(3) + '&longitude=' + parseFloat(data[0].Longitude).toFixed(3);
 
                     fetch(`https://api.open-meteo.com/v1/forecast?${lanlon}&hourly=temperature_2m,relativehumidity_2m,windspeed_10m`)
                         .then(response => response.json())
