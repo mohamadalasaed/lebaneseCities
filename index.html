@@ -96,7 +96,7 @@
   </div>
 
     <script>
-        fetch('https://apicities.onrender.com/lebanonCities')
+        var cities = fetch('https://apicities.onrender.com/lebanonCities')
             .then(response => response.json())
             .then(json => {
                 json.forEach(cities => {
@@ -112,10 +112,7 @@
             document.getElementById('tr2').innerHTML = '';
             document.getElementById('city').innerHTML = '';
             var id = document.getElementById('select').value;
-            fetch('https://apicities.onrender.com/lebanonCities')
-                .then(response => response.json())
-                .then(json => {
-                    var data = json.filter(city => city.Pcode == id);
+                    var data = cities.filter(city => city.Pcode == id);
 
                     document.getElementById('city').innerHTML = data[0].Location_Name_En;
 
