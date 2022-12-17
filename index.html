@@ -112,7 +112,7 @@
             document.getElementById('tr2').innerHTML = '';
             document.getElementById('city').innerHTML = '';
             var id = document.getElementById('select').value;
-                    var data = cities.filter(city => city.Pcode == id);
+                    var data = json.filter(city => city.Pcode == id);
 
                     document.getElementById('city').innerHTML = data[0].Location_Name_En;
 
@@ -157,8 +157,6 @@
                             td9.innerHTML = json.hourly.windspeed_10m[0] + ' km/h';
                             document.getElementById('tr2').appendChild(td9);
                         })
-
-                })
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
