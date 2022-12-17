@@ -10,26 +10,48 @@
 </head>
 
 <body>
-    <!-- navbar -->
     <nav class="navbar bg-light">
-        <div class="container-fluid align-items-center">
-            <p class="navbar-brand"><img class="navbar-brand img-fluid" style="height: 60px;"
-                    src="./assets/R.png">LebaneseCities</p>
-            <p class="navbar-brand">Coach <span class="h5">RonyRizk</span></p>
-            <p class="navbar-brand">By <span class="h5">mohamadalasaed</span></p>
+        <div class="container-fluid justify-items-center align-items-center">
+            <a class="navbar-brand" href="#"><img class="img-fluid mx-1" style="height: 60px;"src="./assets/R.png">LebaneseCities</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <hp class="offcanvas-title" id="offcanvasNavbarLabel">
+                        Coach <strong>RonyRizk</strong>
+                    </hp>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">By
+                                <strong>mohamadalasaed</strong></a>
+                        </li>
+                    </ul>
+                    <form class="d-flex mt-3" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        <button class="btn btn-outline-success" type="submit">
+                            Search
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- section -->
     <section class="container mt-3">
-        <p class="h4 text-center mb-3">Here's a list of lebanese cities</p>
+        <p class="h4 text-center mb-3 text-muted">Here's a list of lebanese cities</p>
         <select class="form-select" aria-label="Default select example" id="select" onchange="displayTable();"></select>
     </section>
 
     <table class="table table-striped mt-4 text-center">
         <tr>
             <th>Pcode</th>
-            <th>Location Name</th>
             <th>Governorate</th>
             <th>District</th>
             <th>Latitude & Longitude</th>
@@ -39,12 +61,11 @@
             <td>NULL</td>
             <td>NULL</td>
             <td>NULL</td>
-            <td>NULL</td>
         </tr>
     </table>
 
     <section class="container mt-3">
-        <p class="h4 text-center mb-3">More information for a <span id="city">specified</span> city</p>
+        <p class="h5 text-center mb-3 text-muted">More information for <span id="city">a specified</span> city</p>
     </section>
 
     <table class="table table-striped mt-4 text-center">
@@ -60,9 +81,9 @@
         </tr>
     </table>
 
-    <p class="h4 text-center">Contact Us!</p>
+    <p class="h4 text-center text-muted">Contact Us!</p>
 
-    <form class="container justify-items-center">
+    <form class="container justify-items-center text-center">
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Username</label>
             <input type="text" class="form-control" id="exampleInputPassword1" id="name">
@@ -70,9 +91,10 @@
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" id="email">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            <div id="emailHelp" class="form-text text-center">We'll never share your email with anyone else.</div>
         </div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-primary justify-items-center" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
             Submit
         </button>
     </form>
@@ -93,8 +115,14 @@
         </div>
     </div>
 
+
+    <div class="container-fluid bg-light text-center p-3">
+        <p>This website is developed by <strong>@mohamadalasaed</strong></p>
+        <p class="mb-1">Coach <strong>RonyRizk</strong></p>
+    </div>
+
     <script>
-          fetch('https://apicities.onrender.com/lebanonCities')
+        fetch('https://apicities.onrender.com')
             .then(response => response.json())
             .then(json => {
                 json.forEach(cities => {
@@ -103,6 +131,7 @@
                     option.value = cities.Pcode;
                     document.getElementById('select').appendChild(option);
                 });
+                displayTable();
             })
 
         function displayTable() {
@@ -110,7 +139,7 @@
             document.getElementById('tr2').innerHTML = '';
             document.getElementById('city').innerHTML = '';
             var id = document.getElementById('select').value;
-            fetch('https://apicities.onrender.com/lebanonCities')
+            fetch('https://apicities.onrender.com')
                 .then(response => response.json())
                 .then(json => {
                     var data = json.filter(city => city.Pcode == id);
@@ -120,10 +149,6 @@
                     var td1 = document.createElement('td');
                     td1.innerHTML = data[0].Pcode;
                     document.getElementById('tr').appendChild(td1);
-
-                    var td2 = document.createElement('td');
-                    td2.innerHTML = data[0].Location_Name_En;
-                    document.getElementById('tr').appendChild(td2);
 
                     var td3 = document.createElement('td');
                     td3.innerHTML = data[0].Governorate;
