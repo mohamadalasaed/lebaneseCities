@@ -40,7 +40,6 @@
             <td>NULL</td>
             <td>NULL</td>
             <td>NULL</td>
-            <td>NULL</td>
         </tr>
     </table>
 
@@ -135,10 +134,10 @@
                     document.getElementById('tr').appendChild(td4);
 
                     var td5 = document.createElement('td');
-                    td5.innerHTML = data[0].Latitude + " & " + data[0].Longitude;
+                    td5.innerHTML = parseFloat(data[0].Latitude).toFixed(3) + " & " + parseFloat(data[0].Longitude).toFixed(3);
                     document.getElementById('tr').appendChild(td5);
 
-                    var lanlon = 'latitude=' + parseFloat(data[0].Latitude).toFixed(3) + '&longitude=' + parseFloat(data[0].Longitude).toFixed(3);
+                    var lanlon = 'latitude=' + data[0].Latitude + '&longitude=' + data[0].Longitude;
 
                     fetch(`https://api.open-meteo.com/v1/forecast?${lanlon}&hourly=temperature_2m,relativehumidity_2m,windspeed_10m`)
                         .then(response => response.json())
