@@ -125,6 +125,7 @@
         fetch('https://apicities.onrender.com/lebanonCities')
             .then(response => response.json())
             .then(json => {
+                var cities = json;
                 json.forEach(cities => {
                     var option = document.createElement('option');
                     option.innerHTML = cities.Location_Name_En;
@@ -139,10 +140,10 @@
             document.getElementById('tr2').innerHTML = '';
             document.getElementById('city').innerHTML = '';
             var id = document.getElementById('select').value;
-            fetch('https://apicities.onrender.com/lebanonCities')
-                .then(response => response.json())
-                .then(json => {
-                    var data = json.filter(city => city.Pcode == id);
+            // fetch('https://apicities.onrender.com/lebanonCities')
+            //     .then(response => response.json())
+            //     .then(json => {
+                    var data = cities.filter(city => city.Pcode == id);
 
                     document.getElementById('city').innerHTML = data[0].Location_Name_En;
 
