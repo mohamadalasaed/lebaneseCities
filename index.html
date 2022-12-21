@@ -127,7 +127,7 @@
 
     <script>
         // https://apicities.onrender.com/lebanonCities
-        fetch('http://localhost:3000/lebanesecities')
+        fetch('https://apicities.onrender.com/lebanonCities')
             .then(response => response.json())
             .then(json => {
                 json.forEach(cities => {
@@ -144,7 +144,7 @@
             document.getElementById('tr2').innerHTML = '';
             document.getElementById('city').innerHTML = '';
             var id = document.getElementById('select').value;
-            fetch('http://localhost:3000/lebanesecities')
+            fetch('https://apicities.onrender.com/lebanonCities')
                 .then(response => response.json())
                 .then(json => {
                     var data = json.filter(city => city.Pcode == id);
