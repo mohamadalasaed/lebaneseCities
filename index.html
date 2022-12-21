@@ -65,6 +65,10 @@
     </table>
 
     <section class="container mt-3">
+        <p class="fw-bold text-center">Location: <span class="fw-normal" id="location">NULL</span> </p>
+    </section>
+
+    <section class="container mt-3">
         <p class="h5 text-center mb-3 text-muted">More information for <span id="city">a specified</span> city</p>
     </section>
 
@@ -122,7 +126,8 @@
     </div>
 
     <script>
-        fetch('https://apicities.onrender.com/lebanonCities')
+        // https://apicities.onrender.com/lebanonCities
+        fetch('http://localhost:3000/lebanesecities')
             .then(response => response.json())
             .then(json => {
                 json.forEach(cities => {
@@ -139,10 +144,12 @@
             document.getElementById('tr2').innerHTML = '';
             document.getElementById('city').innerHTML = '';
             var id = document.getElementById('select').value;
-            fetch('https://apicities.onrender.com/lebanonCities')
+            fetch('http://localhost:3000/lebanesecities')
                 .then(response => response.json())
                 .then(json => {
                     var data = json.filter(city => city.Pcode == id);
+
+                    document.getElementById('location').innerHTML = data[0].Google_Map;
 
                     document.getElementById('city').innerHTML = data[0].Location_Name_En;
 
