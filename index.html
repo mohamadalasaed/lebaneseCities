@@ -12,7 +12,8 @@
 <body>
     <nav class="navbar bg-light">
         <div class="container-fluid justify-items-center align-items-center">
-            <a class="navbar-brand" href="#"><img class="img-fluid mx-1" style="height: 60px;"src="./assets/R.png">LebaneseCities</a>
+            <a class="navbar-brand" href="#"><img class="img-fluid mx-1" style="height: 60px;"
+                    src="./assets/R.png">LebaneseCities</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -32,20 +33,18 @@
                                 <strong>mohamadalasaed</strong></a>
                         </li>
                     </ul>
-                    <form class="d-flex mt-3" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-outline-success" type="submit">
-                            Search
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- section -->
-    <section class="container mt-3">
-        <p class="h4 text-center mb-3 text-muted">Here's a list of all Lebanese cities</p>
+    <section class="container mt-3 px-4">
+        <p class="h4 text-center mb-3 text-muted">Here's a list of all Lebanese cities
+            <select class="border border-2 border-dark rounded border-opacity-25" id="filter" onchange="filter();">
+                <option value="all">Filter</option>
+            </select>
+        </p>
         <select class="form-select" aria-label="Default select example" id="select" onchange="displayTable();"></select>
     </section>
 
@@ -69,7 +68,7 @@
     </section>
 
     <section class="container mt-3">
-        <p class="h5 text-center mb-3 text-muted">More information for <span id="city">a specified</span> city</p>
+        <p class="h5 text-center mb-3 text-muted">More information for <a id="city">a specified</span> city</p>
     </section>
 
     <table class="table table-striped mt-4 text-center">
@@ -87,7 +86,7 @@
 
     <p class="h4 text-center text-muted">Contact Us!</p>
 
-    <form class="container justify-items-center text-center">
+    <form class="container justify-items-center text-center px-4">
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Username</label>
             <input type="text" class="form-control" id="exampleInputPassword1" id="name">
@@ -127,15 +126,27 @@
 
     <script>
         // https://apicities.onrender.com/lebanonCities
+        // http://localhost:3000/lebanoncities
         fetch('https://apicities.onrender.com/lebanonCities')
             .then(response => response.json())
             .then(json => {
+                var citiesdup = json.map(city => city.District);
+                var citiesnodup = citiesdup.filter((item, index) => citiesdup.indexOf(item) == index).sort();
+
                 json.forEach(cities => {
                     var option = document.createElement('option');
                     option.innerHTML = cities.Location_Name_En;
                     option.value = cities.Pcode;
                     document.getElementById('select').appendChild(option);
                 });
+
+                citiesnodup.forEach(element => {
+                    var option = document.createElement('option');
+                    option.innerHTML = element;
+                    option.value = element;
+                    document.getElementById('filter').appendChild(option);
+                });
+
                 displayTable();
             })
 
@@ -143,13 +154,19 @@
             document.getElementById('tr').innerHTML = '';
             document.getElementById('tr2').innerHTML = '';
             document.getElementById('city').innerHTML = '';
+            document.getElementById('location').innerHTML = '';
+
             var id = document.getElementById('select').value;
             fetch('https://apicities.onrender.com/lebanonCities')
                 .then(response => response.json())
                 .then(json => {
                     var data = json.filter(city => city.Pcode == id);
 
-                    document.getElementById('location').innerHTML = data[0].Google_Map;
+                    var span = document.createElement('span');
+                    var loc = ` <a href="${data[0].Google_Map_link}">${data[0].Google_Map_link}</a>`
+                    span.innerHTML = loc;
+                    document.getElementById('location').appendChild(span);
+
 
                     document.getElementById('city').innerHTML = data[0].Location_Name_En;
 
@@ -187,6 +204,33 @@
                             document.getElementById('tr2').appendChild(td9);
                         })
 
+                })
+        }
+
+        function filter() {
+            var district = document.getElementById('filter').value
+            document.getElementById('select').innerHTML = '';
+            fetch('https://apicities.onrender.com/lebanonCities')
+                .then(response => response.json())
+                .then(json => {
+                    if (district == 'all') {
+                        json.forEach(cities => {
+                            var option = document.createElement('option');
+                            option.innerHTML = cities.Location_Name_En;
+                            option.value = cities.Pcode;
+                            document.getElementById('select').appendChild(option);
+                        });
+                        displayTable();
+                    } else {
+                        var cities = json.filter(c => c.District == district);
+                        cities.forEach(city => {
+                            var option = document.createElement('option');
+                            option.innerHTML = city.Location_Name_En;
+                            option.value = city.Pcode;
+                            document.getElementById('select').appendChild(option);
+                        });
+                        displayTable();
+                    }
                 })
         }
     </script>
