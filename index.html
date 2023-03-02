@@ -9,7 +9,7 @@
     <title>Lebanese Cities | WELCOME</title>
 </head>
 
-<body>
+<body class="container-xl border-end border-start d-flex flex-column min-vh-100 p-0">
     <nav class="navbar bg-light">
         <div class="container-fluid justify-items-center align-items-center">
             <a class="navbar-brand" href="#"><img class="img-fluid mx-1" style="height: 60px;"
@@ -21,17 +21,12 @@
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <hp class="offcanvas-title" id="offcanvasNavbarLabel">
-                        Coach <strong>RonyRizk</strong>
-                    </hp>
+                    <hp class="offcanvas-title" id="offcanvasNavbarLabel"></hp>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">By
-                                <strong>mohamadalasaed</strong></a>
-                        </li>
+                        <li class="nav-item"></li>
                     </ul>
                 </div>
             </div>
@@ -39,89 +34,66 @@
     </nav>
 
     <!-- section -->
-    <section class="container mt-3 px-4">
-        <p class="h4 text-center mb-3 text-muted">Here's a list of all Lebanese cities
-            <select class="border border-2 border-dark rounded border-opacity-25" id="filter" onchange="filter();">
-                <option value="all">Filter</option>
-            </select>
-        </p>
-        <select class="form-select" aria-label="Default select example" id="select" onchange="displayTable();"></select>
-    </section>
-
-    <table class="table table-striped mt-4 text-center">
-        <tr>
-            <th>Pcode</th>
-            <th>Governorate</th>
-            <th>District</th>
-            <th>Latitude & Longitude</th>
-        </tr>
-        <tr id="tr">
-            <td>NULL</td>
-            <td>NULL</td>
-            <td>NULL</td>
-            <td>NULL</td>
-        </tr>
-    </table>
-
-    <section class="container mt-3">
-        <p class="fw-bold text-center">Location: <span class="fw-normal" id="location">NULL</span> </p>
-    </section>
-
-    <section class="container mt-3">
-        <p class="h5 text-center mb-3 text-muted">More information for <a id="city">a specified</span> city</p>
-    </section>
-
-    <table class="table table-striped mt-4 text-center">
-        <tr>
-            <th>Timezone</th>
-            <th>Temperature</th>
-            <th>Windspeed</th>
-        </tr>
-        <tr id="tr2">
-            <td>NULL</td>
-            <td>NULL</td>
-            <td>NULL</td>
-        </tr>
-    </table>
-
-    <p class="h4 text-center text-muted">Contact Us!</p>
-
-    <form class="container justify-items-center text-center px-4">
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Username</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" id="name">
+    <div class="my-auto">
+        <div class="text-center">
+            <a href="https://mohamadalasaed.github.io/AngularCountriesProjectOnline/">For All Countries Click This Link</a>
         </div>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" id="email">
-            <div id="emailHelp" class="form-text text-center">We'll never share your email with anyone else.</div>
-        </div>
-        <button type="button" class="btn btn-primary justify-items-center" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">
-            Submit
-        </button>
-    </form>
 
+        <section class="container mt-3 px-4">
+            <p class="h4 text-center mb-3 text-muted">Here's a list of all Lebanese cities
+                <select class="border border-2 border-dark rounded border-opacity-25" id="filter" onchange="filter();">
+                    <option value="all">Filter</option>
+                </select>
+            </p>
+            <select class="form-select" aria-label="Default select example" id="select"
+                onchange="displayTable();"></select>
+        </section>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Thank You</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
+        <table class="table table-striped mt-4 text-center">
+            <tr>
+                <th>Pcode</th>
+                <th>Governorate</th>
+                <th>District</th>
+                <th>Latitude & Longitude</th>
+            </tr>
+            <tr id="tr">
+                <td>NULL</td>
+                <td>NULL</td>
+                <td>NULL</td>
+                <td>NULL</td>
+            </tr>
+        </table>
+
+        <section class="container mt-3">
+            <p class="fw-bold text-center">Location: <span class="fw-normal" id="location">NULL</span> </p>
+        </section>
+
+        <section class="container mt-3">
+            <p class="h5 text-center mb-3 text-muted">More information for <a id="city">a specified</span> city</p>
+        </section>
+
+        <table class="table table-striped mt-4 text-center">
+            <tr>
+                <th>Timezone</th>
+                <th>Temperature</th>
+                <th>Windspeed</th>
+            </tr>
+            <tr id="tr2">
+                <td>NULL</td>
+                <td>NULL</td>
+                <td>NULL</td>
+            </tr>
+        </table>
     </div>
 
-
-    <div class="container-fluid bg-light text-center p-3">
-        <p>This website is developed by <strong>@mohamadalasaed</strong></p>
-        <p class="mb-1">Coach <strong>RonyRizk</strong></p>
+    <div class="container-fluid text-center border-top py-4 bg-light mt-auto">
+        <p class="p-0 m-0">This website was developed by <strong><a class="text-dark"
+                    href="https://www.linkedin.com/in/mohamadalasaed/">mohamadalasaed</a></strong> under the supervision
+            of coach
+            <strong><a class="text-dark"
+                    href="https://www.linkedin.com/in/rony-rizk-0a69121a3/">RonyRizk</a></strong>.<br> 2023, © All
+            Rights Reserved.
+        </p>
     </div>
 
     <script>
